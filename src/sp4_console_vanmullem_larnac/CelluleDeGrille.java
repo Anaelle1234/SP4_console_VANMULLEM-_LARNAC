@@ -9,5 +9,21 @@ package sp4_console_vanmullem_larnac;
  * @author Soso
  */
 public class CelluleDeGrille {
+    private Jeton jetonCourant;
+    private boolean avoirTrouNoir;
+    private boolean avoirDesintegrateur;
     
+    CelluleDeGrille(Jeton cellule, boolean tn, boolean des) {
+        cellule = null;
+        tn = false;
+        des = false;
+    }
+    boolean PresenceJeton(boolean cellule){
+        if (cellule==null){
+            return true;
+        }else{
+            return false;
+        }
+        
+    }
 }
