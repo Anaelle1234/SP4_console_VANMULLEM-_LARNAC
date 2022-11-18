@@ -9,5 +9,12 @@ package sp4_console_vanmullem_larnac;
  * @author Anaëlle
  */
 public class Jeton {
-    
+private String Couleur;
+    public Jeton(String Couleur) {
+        this.Couleur = Couleur;
+    }
 }
+
+  
+   
+    
