@@ -42,6 +42,31 @@ public class CelluleDeGrille {
     public boolean presenceTrouNoir() {
         return avoirTrouNoir;
     }
+    
+    public Jeton recupererJeton(){
+        Jeton JetonTemporaire;
+        JetonTemporaire = jetonCourant;
+        jetonCourant = null;
+        return jetonCourant;
+    }
+    
+    public void supprimerJeton(){
+        jetonCourant = null;
+    }
+    public boolean presenceDesintegrateur(){
+        if (avoirDesintegrateur == true){
+            return true;
+        }else{
+            return false;           
+        }
+    }
+    public void placerDesintegrateur(){
+        avoirDesintegrateur = true;
+    }
+    public void supprimerDesintegrateur (){
+        avoirDesintegrateur = false;
+    }
+    
 }
     
     
