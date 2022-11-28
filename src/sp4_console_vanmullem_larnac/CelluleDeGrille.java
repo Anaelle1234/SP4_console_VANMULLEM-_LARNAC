@@ -13,10 +13,10 @@ public class CelluleDeGrille {
     private boolean avoirTrouNoir;
     private boolean avoirDesintegrateur;
     
-    CelluleDeGrille(Jeton cellule, boolean tn, boolean des) {
-        cellule = null;
-        tn = false;
-        des = false;
+    public void CelluleDeGrille() {
+        jetonCourant=null;
+        avoirTrouNoir = false;
+        avoirDesintegrateur =false;
     }
     
     public boolean presenceJeton(){
