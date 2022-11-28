@@ -12,6 +12,7 @@ public class PlateauDeJeu {
     CelluleDeGrille[][] grille = new CelluleDeGrille [6][7];
 
     public PlateauDeJeu() {
+        
     }
     
 }
