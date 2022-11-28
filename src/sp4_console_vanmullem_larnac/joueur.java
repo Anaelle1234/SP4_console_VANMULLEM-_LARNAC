@@ -21,5 +21,29 @@ public class joueur {
         this.nom = nom;
         this.nombreDesintegrateurs = nombreDesintegrateurs;
     }
- public AffecterCouleur(String)
+ public void AffecterCouleur(String Couleur){
+     if(Couleur=="jaune" || Couleur=="rouge"){
+         this.couleur =couleur;
+     }
+ }
+ public int nombreDeJetons(){
+     return reserveJetons.size();
+ }
+ public void ajouterJeton(Jeton j){
+     reserveJetons.add(j);
+ }
+ public Jeton jouerJeton(){
+     Jeton remove = reserveJetons.remove(0);
+     return remove;        
+ }
+ 
+ public int obtenirDesintegrateur(){
+     nombreDesintegrateurs+=1;
+        return nombreDesintegrateurs;
+ }
+ public int utiliserDesintegrateur(){
+     nombreDesintegrateurs-=1;
+     return nombreDesintegrateurs;
+ }
 }
+
