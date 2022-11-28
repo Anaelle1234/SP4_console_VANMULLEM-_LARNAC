@@ -16,7 +16,9 @@ public class SP4_console_VANMULLEM_LARNAC {
     public static void main(String[] args) {
         // TODO code application logic here
         Jeton rouge = new Jeton ("rouge");
-        
+        Jeton jaune = new Jeton ("jaune");
+        System.out.println(rouge);
+        System.out.println(jaune);
     }
     
 }
