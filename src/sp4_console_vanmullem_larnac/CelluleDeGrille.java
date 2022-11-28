@@ -18,12 +18,31 @@ public class CelluleDeGrille {
         tn = false;
         des = false;
     }
-    boolean PresenceJeton(boolean cellule){
-        if (cellule==null){
+    
+    public boolean PresenceJeton(){
+        if (jetonCourant!=null){
             return true;
         }else{
             return false;
-        }
-        
+        }    
+    }
+    
+    public void affecterJeton(Jeton jetonCourant) { //permet de prendre un 
+        //nouveau jeton et de l'ajouter à ceux déjà existant
+        this.jetonCourant = jetonCourant;
+    }
+    
+
+    public void placerTrouNoir(){
+        avoirTrouNoir = true;
+}
+    public void supprimerTrouNoir(){
+        avoirTrouNoir = false;
+}
+    public boolean presenceTrouNoir() {
+        return avoirTrouNoir;
     }
 }
+    
+    
+
