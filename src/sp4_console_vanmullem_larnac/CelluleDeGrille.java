@@ -19,7 +19,7 @@ public class CelluleDeGrille {
         des = false;
     }
     
-    public boolean PresenceJeton(){
+    public boolean presenceJeton(){
         if (jetonCourant!=null){
             return true;
         }else{
@@ -44,10 +44,10 @@ public class CelluleDeGrille {
     }
     
     public Jeton recupererJeton(){
-        Jeton JetonTemporaire;
-        JetonTemporaire = jetonCourant;
+        Jeton jetonTemporaire;
+        jetonTemporaire = jetonCourant;
         jetonCourant = null;
-        return jetonCourant;
+        return jetonTemporaire;
     }
     
     public void supprimerJeton(){
@@ -67,6 +67,28 @@ public class CelluleDeGrille {
         avoirDesintegrateur = false;
     }
     
+    public void activerTrouNoir(){
+        supprimerJeton();
+        supprimerTrouNoir();    
+    }
+    
+    @Override
+    public String toString() {
+        if (jetonCourant != null){
+            return jetonCourant.toString();
+        }
+        if (avoirTrouNoir == true) {
+            System.out.println("@");
+        }
+        if (avoirDesintegrateur == true){
+            System.out.println("D");
+        }
+        
+        if (avoirDesintegrateur == false & avoirTrouNoir == false & jetonCourant == null){
+            System.out.println(".");
+        }
+        return toString();
+    }
 }
     
     
