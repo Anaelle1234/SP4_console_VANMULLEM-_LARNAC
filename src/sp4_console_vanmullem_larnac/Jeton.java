@@ -13,6 +13,20 @@ private String Couleur;
     public Jeton(String Couleur) {
         this.Couleur = Couleur;
     }
+  public String lireCouleur(){
+      return(Couleur);   
+  }  
+
+    @Override
+    public String toString() {
+        if (Couleur=="rouge"){
+            Couleur="R";
+        }else if (Couleur =="jaune"){
+            Couleur="J";   
+        }
+        return "Jeton{" + "Couleur=" + Couleur + '}';
+    }
+  
 }
 
   
