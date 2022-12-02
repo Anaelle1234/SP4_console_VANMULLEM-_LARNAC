@@ -12,13 +12,13 @@ import java.util.Random;
  */
 public class Partie {
     
-    private String listeJoueurs[]= new String[2]; //tableau référence des deux joueurs 
+    private joueur listeJoueurs[]= new joueur[2]; //tableau référence des deux joueurs 
     private joueur joueurCourant;
     private PlateauDeJeu plateau;
     
-    public void Partie(joueur Joueur) {
-        listeJoueurs[0]="Joueur";
-        listeJoueurs[1]="Joueur";
+    public void Partie(joueur joueur1, joueur joueur2) {
+        listeJoueurs[0]=joueur1;
+        listeJoueurs[1]=joueur2;
         
         plateau = new PlateauDeJeu();
         
@@ -29,16 +29,27 @@ public class Partie {
         int nbr = n.nextInt(2); // choisie aléatoirement entre 1 et 2
         
         if (nbr==1) {
-            listeJoueurs[0] = "Rouge";
-            listeJoueurs[1] = "Jaune";            
+            listeJoueurs[0].AffecterCouleur("rouge"); //methode AffecterCouleur de la classe joueur
+            listeJoueurs[1].AffecterCouleur("jaune");        
         }else{ // si nbr==2
-            listeJoueurs[0] = "Jaune";
-            listeJoueurs[1] = "Rouge";
+            listeJoueurs[0].AffecterCouleur("jaune");
+            listeJoueurs[1].AffecterCouleur("rouge");
         }
     }
     
-    public void creerEtAffecterJeton(joueur Joueur) {
+    public void creerEtAffecterJeton(joueur jr) {
+        for (int i=1; i<=30; i++){
+            Jeton jeton_i = new Jeton (jr.lireCouleur()); //création obj jetoni 
+            jr.ajouterJeton(jeton_i);
+        }
         
+    }
+    
+    public void placerTrousNoirsEtDesintegrateurs(){
+        
+    }
+    
+    public void initialiserPartie(){
         
     }
 }
