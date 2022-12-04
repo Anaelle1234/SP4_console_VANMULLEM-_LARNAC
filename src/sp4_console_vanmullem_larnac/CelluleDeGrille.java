@@ -31,7 +31,7 @@ public class CelluleDeGrille {
         //nouveau jeton et de l'ajouter à ceux déjà existant
         this.jetonCourant = jetonCourant;
     }
-    public String LireCouleurJeton(){
+    public String LireCouleurDuJeton(){
         if (jetonCourant!=null){
             return jetonCourant.lireCouleur();
         }else{
