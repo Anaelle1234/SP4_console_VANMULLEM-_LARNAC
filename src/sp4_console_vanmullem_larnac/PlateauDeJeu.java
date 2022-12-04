@@ -63,6 +63,30 @@ public String lireCouleurDuJeton(int x, int y){
     return grille[x][y].LireCouleurDuJeton();
 }
 
+public void tasserColonne(int col) {
+    int nb_ligne = 0;
+    for(int i = 0; i < 8; i++){
+        if(grille[i][col] == null){
+            for (i = 0; i < 8; i++) {
+                if (grille[i][col] == null) {
+                    nb_ligne = i;
+                    break;
+                }
+            }
+            for(i = nb_ligne; i < 8; i++){
+                if(grille[i][col] != null){
+                    grille[i-1][col] = grille[i][col];
+                        for (i = nb_ligne; i < 8; i++) { //REVOIR...
+                            if (grille[i][col] != null) {
+                                grille[i - 1][col] = grille[i][col];
+                            }
+                        }
+                }
+            }
+        }
+    }
+}
+
     public void supprimerTrouNoir(int x, int y){
         grille[x][y].supprimerTrouNoir();
     }
