@@ -61,4 +61,44 @@ public boolean presenceJeton(int x, int y){
 public String lireCouleurDuJeton(int x, int y){
     grille[x][y].LireCouleurDuJeton();
     return grille[x][y].LireCouleurDuJeton();
-}}
+}
+
+    public void supprimerTrouNoir(int x, int y){
+        grille[x][y].supprimerTrouNoir();
+    }
+
+    public boolean presenceDesintegrateur(int x, int y){
+        return(grille[x][y].presenceDesintegrateur());
+    }
+
+    public void placerDesintegrateur(int x, int y) {
+        grille[x][y].placerDesintegrateur();
+    }
+
+    public void supprimeresentDegrateur(int x, int y) {
+        grille[x][y].supprimerDesintegrateur();
+    }
+
+    public void supprimerJeton(int x, int y) {
+        grille[x][y].supprimerJeton();
+    }
+
+    public Jeton recupererJeton(int x, int y){
+        return(grille[x][y].recupererJeton());
+    }
+
+    public String lireJeton(int x, int y) {
+        return (grille[x][y].LireCouleurDuJeton());
+    }
+
+    public boolean presenceTrouNoir(int x, int y){
+        return(grille[x][y].presenceTrouNoir());
+    }
+
+    public void placerTrouNoir(int x, int y){
+        grille[x][y].placerTrouNoir();
+    }
+
+
+
+}
