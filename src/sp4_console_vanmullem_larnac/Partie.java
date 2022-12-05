@@ -69,7 +69,8 @@ public class Partie {
         placerTrousNoirsEtDesintegrateurs();
     }
  
-    public void lancerPartie() { //REVOIR
+    
+    public void lancerPartie() {
         
         Scanner sc = new Scanner(System.in);
         this.initialiserPartie(); //utilisation methode initialiser partie
@@ -125,44 +126,53 @@ public class Partie {
                 case 2: //cas où la réponse est 2)
                     
                     System.out.println("Choisissez un de vos jetons" + '\n' + "Exprimer la coordonnée en Ligne puis Colonne");
-                    int ligne_r = sc.nextInt();
-                    int col_r = sc.nextInt();
-                    if (plateau.lireJeton(ligne_r, col_r).equals(joueurCourant.lireCouleur())) {
-                        joueurCourant.ajouterJeton(plateau.recupererJeton(ligne_r, col_r));
+                    int ligneJeton = sc.nextInt(); //récupère la réponse du joueur
+                    int colJeton = sc.nextInt();
+                    
+                    //CAS OU IL Y A UN JETON
+                    if (plateau.lireJeton(ligneJeton, colJeton).equals(joueurCourant.lireCouleur())) {
+                        plateau.recupererJeton(ligneJeton, colJeton);
                         System.out.println("Jeton récupéré.");
                         break;
-                    } else if (plateau.lireJeton(ligne_r, col_r).equals("n")) {
+                    
+                    // CAS OU IL N'Y A PAS DE JETON                
+                    } else if (plateau.presenceJeton(ligneJeton, colJeton)==false) { 
                         System.out.println("Aucun jeton sur cette case.");
+                    
+                    // RESTE : CAS OU CE N'EST PAS LE JETON DU JOUEUR
                     } else {
                         System.out.println("Ce n'est pas un de vos jetons.");
                     }
                         
-                case 3:
+                case 3: //cas où la réponse est 3)
+                    
+                    //CAS OU LE JOUER N'A PAS DE DESINTEGRATEUR
                     if (joueurCourant.nombreDesintegrateurs == 0) { //A REVOIR
                         System.out.println("Vous n'avez pas de desintagrateur.");
                         break;
+                    
+                    //CAS OU LE JOUEUR PEUT DESINTEGRER UN JETON
                     } else {
-                        System.out.println("Choisissez une case" + '\n' + "Exprimer la en coordonnée Ligne puis Colonne");
-                        int ligne_d = sc.nextInt();
-                        int col_d = sc.nextInt();
-                        if (plateau.presenceJeton(ligne_d, col_d)){ 
-                            plateau.supprimerJeton(ligne_d, col_d);
-                            joueurCourant.utiliserDesintegrateur();
+                        System.out.println("Vous devez choisir une case." );
+                        System.out.println("Entrez le numéro de la ligne entre 1 et 6 :"); //coord ligne
+                        int ligneDes = sc.nextInt(); //récupère les coordonnées du joueur
+                        System.out.println("Entrez le numéro de la colonne entre 1 et 7 :"); //coord colonne
+                        int colDes = sc.nextInt();
+                        
+                        if (plateau.presenceJeton(ligneDes, colDes)){ // seulement s'il y a un jeton dans la case visée
+                            plateau.supprimerJeton(ligneDes, colDes); // vise le jeton à supprimer
+                            joueurCourant.utiliserDesintegrateur(); // supression du jeton avec methode utiliserdesintegrateur
                             break;
+                        
+                        // CAS OU PAS DE JETON
                         } else {
                             System.out.println("Il n'y a pas de jeton sur cette case.");
                         }
                     }
-                    System.out.println("Sur qu'elle colonne voulez vous jouez ? " + '\n' + "Entrez un chiffre entre 1 et 7");
-                }
-
-                int col = sc.nextInt();
-                String couleur = joueurCourant.lireCouleur();
-                Jeton jeton_param = joueurCourant.jouerJeton();
-                plateau.ajouterJetonDansColonne(jeton_param, col);
-
             }
-        }
 
+        }
     }
+
 }
+
