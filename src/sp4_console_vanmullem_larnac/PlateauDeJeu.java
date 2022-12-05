@@ -63,32 +63,80 @@ public String lireCouleurDuJeton(int x, int y){
     return grille[x][y].LireCouleurDuJeton();
 }
 
-public void tasserColonne(int col) {
-    int nb_ligne = 0;
-    for(int i = 0; i < 8; i++){
-        if(grille[i][col] == null){
-            for (i = 0; i < 8; i++) {
-                if (grille[i][col] == null) {
-                    nb_ligne = i;
-                    break;
-                }
-            }
-            for(i = nb_ligne; i < 8; i++){
-                if(grille[i][col] != null){
-                    grille[i-1][col] = grille[i][col];
-                        for (i = nb_ligne; i < 8; i++) { //REVOIR...
-                            if (grille[i][col] != null) {
-                                grille[i - 1][col] = grille[i][col];
-                            }
-                        }
+public boolean ligneGagnantePourCouleur(String Couleur){
+    boolean verification =false;
+    int cpt=0;
+    for(int i=0;i<3;i++){
+    for(int c=0;c<7;c++){
+        if(grille[i][c].LireCouleurDuJeton()==grille[i+1][c].LireCouleurDuJeton()&&grille[i+2][c].LireCouleurDuJeton()==grille[i+3][c].LireCouleurDuJeton()){
+        cpt=1;    
+        }
+    }
+    }
+  if (cpt==1){
+      verification=true;
+}
+        return verification;
+}
+
+public boolean colonneGagnantePourCouleur(String a){
+    boolean verification =false;
+    int cpt=0;
+    for(int i =0;i<3;i++){
+        for(int c=0;c<7;i++){
+            if(grille[i][c].LireCouleurDuJeton()==grille[i+1][c].LireCouleurDuJeton()){
+                if(grille[i+1][c].LireCouleurDuJeton()==grille[i+2][c].LireCouleurDuJeton()){
+                    if(grille[i+2][c].LireCouleurDuJeton()==grille[i+3][c].LireCouleurDuJeton()){
+                        cpt=1;
+                    }
                 }
             }
         }
     }
+    if(cpt==1){
+        verification=true;
+    }  
+    return verification;
 }
 
-    public void supprimerTrouNoir(int x, int y){
-        grille[x][y].supprimerTrouNoir();
+public boolean diagonaleMontanteGagnantePourCouleur(String b){
+    
+        return false;
+    
+}
+
+public boolean diagonaleDesencanteGagnantePourCouleur(String d){
+    
+        return false;
+    
+}
+
+
+
+
+public void tasserColonne(int c) {
+    int nb_ligne = 0;
+            for(int i = nb_ligne; i < 8; i++){
+                if(grille[i][c].presenceJeton()==false && grille[i+1][c].presenceJeton()==true){
+                    grille[i][c] = grille[i+1][c];
+                }
+            }
+}
+public boolean colonneRemplie (int a){
+    int cpt=0;
+    for(int i=0;i<7;i++){
+        if(grille[i][a].presenceJeton()==true){
+            cpt+=1;
+        }
+        if (cpt==7){
+            return true;
+        }
+    }
+        return true;
+}
+
+    public void supprimerTrouNoir(int i, int c){
+        grille[i][c].supprimerTrouNoir();
     }
 
     public boolean presenceDesintegrateur(int x, int y){
