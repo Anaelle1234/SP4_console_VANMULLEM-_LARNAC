@@ -206,5 +206,4 @@ public boolean colonneRemplie (int a){//on regarde si on peut encore ajouter un 
     }
 
 
-
 }
