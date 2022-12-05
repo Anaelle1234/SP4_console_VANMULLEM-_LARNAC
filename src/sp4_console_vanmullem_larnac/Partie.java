@@ -100,7 +100,7 @@ public class Partie {
         
         Scanner sc = new Scanner(System.in);
         this.initialiserPartie(); //utilisation methode initialiser partie
-        int nLigne;
+        int nLigne=0;
         
         if (plateau.grilleRempli()== false) { // si la grille renvoie false alors elle est vide
             
