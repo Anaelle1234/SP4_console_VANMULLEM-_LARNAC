@@ -45,39 +45,65 @@ public class Partie {
         }
         
     }
-        
-    public void placerTrousNoirsEtDesintegrateurs(){
-        int n = 0;
-        int m = 0;
-        int i = 0;
-        if (i < 3) {
-            plateau.placerTrouNoir(n, m);
-                if (i > 2) {
-                    plateau.placerTrouNoir(n,m);
-                    plateau.presenceTrouNoir(n, m);
-                    plateau.placerDesintegrateur(n, m);
-                    plateau.presenceDesintegrateur(n, m);
-                }
-
-            }
-        }
     
-    public void initialiserPartie(){ 
-        attribuerCouleurAuxJoueurs();
-        creeEtAffecterJeton(jeton_1); //Revoir nomination joueur...
-        creeEtAffecterJeton(jeton_2);
-        placerTrousNoirsEtDesintegrateurs();
+    public void  placerTrousNoirsEtDesintegrateurs() {
+
+    // placement des 3 trous noirs et désintégrateur
+    for (int i=0;i<3;i++){ // i fais 3 cas ( i prend 0 puis 1 puis 2 )
+            Random R1=new Random(); //création objet R1 aleatoire
+            int lg = R1.nextInt(7); //choix ligne aleatoirement
+            
+            Random R2=new Random();
+            int cl = R2.nextInt(6); //choix colonne aleatoirement
+        
+        // s'il y a ni trou noir ni desintegrateur
+        if (plateau.presenceTrouNoir(lg,cl)==false && plateau.presenceDesintegrateur(lg,cl)==false)  {
+              plateau.placerTrouNoir(lg,cl); //on place un trou noir de même coord que le desintegrateur
+              plateau.placerDesintegrateur(lg,cl); //on place un desintegrateur de même coord que le trou noir
+        }
     }
- 
-    public void lancerPartie() { //REVOIR
+
+    // placement des deux autres trous noirs et desintegrateur
+    for(int j=0;j<2;j++){ //j fais 2 cas (j prend 0 puis 2)
+        Random R3=new Random(); //choix aleatoire de R3
+        int l_tn = R3.nextInt(7);
+        
+        Random R4=new Random();
+        int c_tn = R4.nextInt(6);
+        
+        Random R5=new Random();
+        int l_des = R5.nextInt(7);
+        
+        Random R6=new Random();
+        int c_des = R6.nextInt(6);
+
+        if (plateau.presenceTrouNoir(l_tn,c_tn)==false && plateau.presenceDesintegrateur(l_tn,c_tn)==false )  {
+            plateau.placerTrouNoir(l_tn,c_tn); //"false" car on place un trou noir si il n'y a rien 
+        }
+
+        if (plateau.presenceDesintegrateur(l_des,c_des)==false &&plateau.presenceTrouNoir(l_des,c_des)==false)  {
+            plateau.placerDesintegrateur(l_des,c_des);//pareil que pour les trous noirs
+        }
+    }
+}    
+
+    public void initialiserPartie(){
+        
+        attribuerCouleurAuxJoueurs(); //définit quel joueur est rouge ou jaune
+        creerEtAffecterJeton(listeJoueurs[0]);
+        creerEtAffecterJeton(listeJoueurs[1]);
+        placerTrousNoirsEtDesintegrateurs() ; // placement des éléments du jeu
+
+    }
+    
+    public void lancerPartie() {
         
         Scanner sc = new Scanner(System.in);
         this.initialiserPartie(); //utilisation methode initialiser partie
-        int nLigne;
+        int nLigne=0;
         
         if (plateau.grilleRempli()== false) { // si la grille renvoie false alors elle est vide
-            joueurCourant.AffecterCouleur(couleur); //chaque joueur prennent une couleur
-
+            
             System.out.println("Que souhaitez vous faire ?" + '\n' + " 1) Jouer un jeton." + '\n' + "2) Récupérer un jeton."+ '\n' + "3) Utiliser un Desintegrateur.");
             int rep_1 = sc.nextInt(); // permet d'enregistrer et lire la réponse de l'utilisateur
                 
@@ -125,44 +151,53 @@ public class Partie {
                 case 2: //cas où la réponse est 2)
                     
                     System.out.println("Choisissez un de vos jetons" + '\n' + "Exprimer la coordonnée en Ligne puis Colonne");
-                    int ligne_r = sc.nextInt();
-                    int col_r = sc.nextInt();
-                    if (plateau.lireJeton(ligne_r, col_r).equals(joueurCourant.lireCouleur())) {
-                        joueurCourant.ajouterJeton(plateau.recupererJeton(ligne_r, col_r));
+                    int ligneJeton = sc.nextInt(); //récupère la réponse du joueur
+                    int colJeton = sc.nextInt();
+                    
+                    //CAS OU IL Y A UN JETON
+                    if (plateau.lireJeton(ligneJeton, colJeton).equals(joueurCourant.lireCouleur())) {
+                        plateau.recupererJeton(ligneJeton, colJeton);
                         System.out.println("Jeton récupéré.");
                         break;
-                    } else if (plateau.lireJeton(ligne_r, col_r).equals("n")) {
+                    
+                    // CAS OU IL N'Y A PAS DE JETON                
+                    } else if (plateau.presenceJeton(ligneJeton, colJeton)==false) { 
                         System.out.println("Aucun jeton sur cette case.");
+                    
+                    // RESTE : CAS OU CE N'EST PAS LE JETON DU JOUEUR
                     } else {
                         System.out.println("Ce n'est pas un de vos jetons.");
                     }
                         
-                case 3:
+                case 3: //cas où la réponse est 3)
+                    
+                    //CAS OU LE JOUER N'A PAS DE DESINTEGRATEUR
                     if (joueurCourant.nombreDesintegrateurs == 0) { //A REVOIR
                         System.out.println("Vous n'avez pas de desintagrateur.");
                         break;
+                    
+                    //CAS OU LE JOUEUR PEUT DESINTEGRER UN JETON
                     } else {
-                        System.out.println("Choisissez une case" + '\n' + "Exprimer la en coordonnée Ligne puis Colonne");
-                        int ligne_d = sc.nextInt();
-                        int col_d = sc.nextInt();
-                        if (plateau.presenceJeton(ligne_d, col_d)){ 
-                            plateau.supprimerJeton(ligne_d, col_d);
-                            joueurCourant.utiliserDesintegrateur();
+                        System.out.println("Vous devez choisir une case." );
+                        System.out.println("Entrez le numéro de la ligne entre 1 et 6 :"); //coord ligne
+                        int ligneDes = sc.nextInt(); //récupère les coordonnées du joueur
+                        System.out.println("Entrez le numéro de la colonne entre 1 et 7 :"); //coord colonne
+                        int colDes = sc.nextInt();
+                        
+                        if (plateau.presenceJeton(ligneDes, colDes)){ // seulement s'il y a un jeton dans la case visée
+                            plateau.supprimerJeton(ligneDes, colDes); // vise le jeton à supprimer
+                            joueurCourant.utiliserDesintegrateur(); // supression du jeton avec methode utiliserdesintegrateur
                             break;
+                        
+                        // CAS OU PAS DE JETON
                         } else {
                             System.out.println("Il n'y a pas de jeton sur cette case.");
                         }
                     }
-                    System.out.println("Sur qu'elle colonne voulez vous jouez ? " + '\n' + "Entrez un chiffre entre 1 et 7");
-                }
-
-                int col = sc.nextInt();
-                String couleur = joueurCourant.lireCouleur();
-                Jeton jeton_param = joueurCourant.jouerJeton();
-                plateau.ajouterJetonDansColonne(jeton_param, col);
-
             }
-        }
 
+        }
     }
+
 }
+
