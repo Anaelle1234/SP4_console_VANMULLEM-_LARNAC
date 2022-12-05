@@ -87,13 +87,14 @@ public class Partie {
     }
 }    
 
-    public void initialiserPartie(){ 
-        attribuerCouleurAuxJoueurs();
-        creeEtAffecterJeton(jeton_1); //Revoir nomination joueur...
-        creeEtAffecterJeton(jeton_2);
-        placerTrousNoirsEtDesintegrateurs();
+    public void initialiserPartie(){
+        
+        attribuerCouleurAuxJoueurs(); //définit quel joueur est rouge ou jaune
+        creerEtAffecterJeton(listeJoueurs[0]);
+        creerEtAffecterJeton(listeJoueurs[1]);
+        placerTrousNoirsEtDesintegrateurs() ; // placement des éléments du jeu
+
     }
- 
     
     public void lancerPartie() {
         
@@ -102,8 +103,7 @@ public class Partie {
         int nLigne;
         
         if (plateau.grilleRempli()== false) { // si la grille renvoie false alors elle est vide
-            joueurCourant.AffecterCouleur(couleur); //chaque joueur prennent une couleur
-
+            
             System.out.println("Que souhaitez vous faire ?" + '\n' + " 1) Jouer un jeton." + '\n' + "2) Récupérer un jeton."+ '\n' + "3) Utiliser un Desintegrateur.");
             int rep_1 = sc.nextInt(); // permet d'enregistrer et lire la réponse de l'utilisateur
                 
