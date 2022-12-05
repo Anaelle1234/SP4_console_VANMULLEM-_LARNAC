@@ -50,7 +50,7 @@ public class Partie {
 
     // placement des 3 trous noirs et désintégrateur
     for (int i=0;i<3;i++){ // i fais 3 cas ( i prend 0 puis 1 puis 2 )
-            Random R1=new Random(); //création objet aleatoire
+            Random R1=new Random(); //création objet R1 aleatoire
             int lg = R1.nextInt(7); //choix ligne aleatoirement
             
             Random R2=new Random();
@@ -63,42 +63,30 @@ public class Partie {
         }
     }
 
-    // placement 
-    for(int j=0;j<2;j++){
-        Random m=new Random();
-            int nb = m.nextInt(7);
-            Random l=new Random();
-            int mb = l.nextInt(6);
-             Random f=new Random();
-            int nbr = f.nextInt(7);
-            Random h=new Random();
-            int mbr = h.nextInt(6);
+    // placement des deux autres trous noirs et desintegrateur
+    for(int j=0;j<2;j++){ //j fais 2 cas (j prend 0 puis 2)
+        Random R3=new Random(); //choix aleatoire de R3
+        int l_tn = R3.nextInt(7);
+        
+        Random R4=new Random();
+        int c_tn = R4.nextInt(6);
+        
+        Random R5=new Random();
+        int l_des = R5.nextInt(7);
+        
+        Random R6=new Random();
+        int c_des = R6.nextInt(6);
 
-      if (plateau.presenceTrouNoir(nb,mb)==true && plateau.presenceDesintegrateur(nb,mb)==true )  {
-              plateau.placerTrounoir(nb,mb);
+        if (plateau.presenceTrouNoir(l_tn,c_tn)==false && plateau.presenceDesintegrateur(l_tn,c_tn)==false )  {
+            plateau.placerTrouNoir(l_tn,c_tn); //"false" car on place un trou noir si il n'y a rien 
         }
 
-     if (  plateau.presenceDesintegrateur(nbr,mbr)==true &&plateau.presenceTrouNoir(nb,mb)==true)  {
-         plateau.placerDesintegrateur(nbr,mbr);
-     }
+        if (plateau.presenceDesintegrateur(l_des,c_des)==false &&plateau.presenceTrouNoir(l_des,c_des)==false)  {
+            plateau.placerDesintegrateur(l_des,c_des);//pareil que pour les trous noirs
+        }
     }
 }    
-    public void placerTrousNoirsEtDesintegrateurs(){
-        int n = 0;
-        int m = 0;
-        int i = 0;
-        if (i < 3) {
-            plateau.placerTrouNoir(n, m);
-                if (i > 2) {
-                    plateau.placerTrouNoir(n,m);
-                    plateau.presenceTrouNoir(n, m);
-                    plateau.placerDesintegrateur(n, m);
-                    plateau.presenceDesintegrateur(n, m);
-                }
 
-            }
-        }
-    
     public void initialiserPartie(){ 
         attribuerCouleurAuxJoueurs();
         creeEtAffecterJeton(jeton_1); //Revoir nomination joueur...
