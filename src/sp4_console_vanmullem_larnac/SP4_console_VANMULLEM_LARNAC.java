@@ -19,6 +19,9 @@ public class SP4_console_VANMULLEM_LARNAC {
         Jeton jaune = new Jeton ("jaune");
         System.out.println(rouge);
         System.out.println(jaune);
+        System.out.println("la partie commence");
+        Partie une_partie =new Partie();
+        une_partie.lancerPartie();
     }
     
 }
