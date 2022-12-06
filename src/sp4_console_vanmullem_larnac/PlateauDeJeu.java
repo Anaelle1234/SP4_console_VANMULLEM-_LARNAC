@@ -13,9 +13,9 @@ public class PlateauDeJeu {//création de la classe plateau de jeu
 // 6 est le nombre de lignes
 // 7 est le nombre de colonnes
     public PlateauDeJeu() {//constructeur de la classe
-     for(int i=0;i<=6;i++){
-            for(int j=0;i<=7;i++){
-                grille [i][j]=new CelluleDeGrille ();//initialise untableau de 42 cases
+     for(int i=0;i<6;i++){
+            for(int j=0;j<7;j++){
+                grille [i][j]=new CelluleDeGrille();//initialise untableau de 42 cases
             }
         }  
     }
@@ -34,8 +34,8 @@ public class PlateauDeJeu {//création de la classe plateau de jeu
     
     public boolean grilleRempli(){//on regarde si la grille est pleine
         int cpt=0;//on initialise le compteur à 0
-        for(int i=0;i<=6;i++){//on balaie les lignes
-            for(int j=0;i<=7;i++){//on balaie les colonnes
+        for(int i=0;i<7;i++){//on balaie les lignes
+            for(int j=0;j<8;j++){//on balaie les colonnes
                 if(grille[i][j]!=null){//si il y a quelquechoses
                     cpt+=1;//on incrémente le compteur
                 }
@@ -198,7 +198,7 @@ public boolean colonneRemplie (int a){//on regarde si on peut encore ajouter un 
     }
 
     public boolean presenceTrouNoir(int x, int y){
-        return(grille[x][y].presenceTrouNoir());
+        return grille[x][y].presenceTrouNoir()==true;
     }
 
     public void placerTrouNoir(int x, int y){
