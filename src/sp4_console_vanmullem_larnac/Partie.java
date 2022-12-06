@@ -17,7 +17,7 @@ public class Partie {
     private joueur joueurCourant;
     private PlateauDeJeu plateau;
     
-    public void Partie(joueur joueur1, joueur joueur2) {
+    public Partie(joueur joueur1, joueur joueur2) {
         listeJoueurs[0]=joueur1;
         listeJoueurs[1]=joueur2;
         
@@ -51,15 +51,15 @@ public class Partie {
     // placement des 3 trous noirs et désintégrateur
     for (int i=0;i<3;i++){ // i fais 3 cas ( i prend 0 puis 1 puis 2 )
             Random R1=new Random(); //création objet R1 aleatoire
-            int lg = R1.nextInt(7); //choix ligne aleatoirement
+            int lg = R1.nextInt(6); //choix ligne aleatoirement
             
             Random R2=new Random();
-            int cl = R2.nextInt(6); //choix colonne aleatoirement
+            int cl = R2.nextInt(7); //choix colonne aleatoirement
         
         // s'il y a ni trou noir ni desintegrateur
         if (plateau.presenceTrouNoir(lg,cl)==false && plateau.presenceDesintegrateur(lg,cl)==false)  {
-              plateau.placerTrouNoir(lg,cl); //on place un trou noir de même coord que le desintegrateur
-              plateau.placerDesintegrateur(lg,cl); //on place un desintegrateur de même coord que le trou noir
+            plateau.placerTrouNoir(lg,cl); //on place un trou noir de même coord que le desintegrateur
+            plateau.placerDesintegrateur(lg,cl); //on place un desintegrateur de même coord que le trou noir
         }
     }
 
